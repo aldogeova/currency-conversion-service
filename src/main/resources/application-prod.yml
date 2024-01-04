@@ -1,0 +1,33 @@
+# application-prod.yml
+server:
+  port: 9092
+
+spring:
+#Mongo DB
+  data:
+    mongodb:
+      host: host.docker.internal
+      port: 27017
+      database: pros
+      username: anavarrete
+      password: Navarretea11221
+      authentication-database: admin
+
+#Redis DB
+    redis:
+      host: host.docker.internal
+      port: 6379
+
+#Logs
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    com.pros.com.pros.currencyconversionservice: INFO
+    org.springframework.data.mongodb.core.MongoTemplate: INFO
+    org.springframework.data.mongodb.core.convert: INFO
+    org.springframework.data.mongodb.core.mapping: INFO
+    org.springframework.data.mongodb.core.query: INFO
+debug: true
+
+

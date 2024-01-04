@@ -1,0 +1,28 @@
+# application.yml
+
+#Google Cloud Credentials
+spring:
+  cloud:
+    gcp:
+      credentials:
+        location: classpath:pros-exchange-rate-0be86127e257.json
+
+#Open API Swagger documentation
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+
+#Spring Boot Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  endpoint:
+    health:
+      show-details: always
+

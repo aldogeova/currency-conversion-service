@@ -1,0 +1,34 @@
+# application-dev.yml
+server:
+  port: 9092
+debug: true
+
+spring:
+#Mongo DB
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      database: pros
+      username: anavarrete
+      password: Navarretea11221
+      authentication-database: admin
+
+#Redis DB
+    redis:
+      host: 127.0.0.1
+      port: 6379
+
+#Logs
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    com.pros.com.pros.currencyconversionservice: DEBUG
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+    org.springframework.data.mongodb.core.convert: DEBUG
+    org.springframework.data.mongodb.core.mapping: DEBUG
+    org.springframework.data.mongodb.core.query: TRACE
+
+
+

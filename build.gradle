@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.1'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'com.google.cloud.artifactregistry.gradle-plugin' version '2.2.1'
+}
+
+group = 'com.pros'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '21'
+}
+
+def serviceAccountFile = "$projectDir/src/main/resources/pros-exchange-rate-0be86127e257.json"
+
+repositories {
+    mavenCentral()
+    maven {
+        url "artifactregistry://us-east4-maven.pkg.dev/pros-exchange-rate/exchange-repository"
+        credentials{
+            username = "_json_key"
+            password = new File(serviceAccountFile).text
+        }
+
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'com.google.cloud:google-cloud-artifact-registry-spring-starter:5.0.0-preview'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.2.0'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'com.pros:currency-conversion-base:0.0.11-SNAPSHOT'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3'
+    implementation 'io.lettuce:lettuce-core'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
